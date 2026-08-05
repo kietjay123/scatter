@@ -201,7 +201,7 @@ func _exit_tree():
 
 
 func _get_property_list() -> Array[Dictionary]:
-	var list := []
+	var list: Array[Dictionary] = []
 	list.push_back({
 		name = "modifier_stack",
 		type = TYPE_OBJECT,
