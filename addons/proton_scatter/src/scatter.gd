@@ -173,7 +173,6 @@ var _physics_helper: ProtonScatterPhysicsHelper
 var _body_rid: RID
 var _collision_shapes: Array[RID]
 var _ignore_transform_notification = false
-var _is_using_jolt: bool = false
 
 
 func _ready() -> void:
@@ -181,7 +180,6 @@ func _ready() -> void:
 		set_notify_transform(true)
 		child_exiting_tree.connect(_on_child_exiting_tree)
 
-	_is_using_jolt = ProjectSettings.get_setting("physics/3d/physics_engine") == "Jolt Physics"
 	_perform_sanity_check()
 	_discover_items()
 	update_configuration_warnings.call_deferred()
@@ -749,7 +747,7 @@ func _on_transforms_ready(new_transforms: ProtonScatterTransformList) -> void:
 
 	transforms = new_transforms
 
-	if force_uniform_scale or _is_using_jolt:
+	if force_uniform_scale:
 		transforms.enforce_uniform_scale()
 
 	if not transforms or transforms.is_empty():
